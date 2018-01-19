@@ -80,7 +80,6 @@ class PostAffiliatePro extends \Oara\Network
         $session = new \Gpf_Api_Session("https://" . $this->_credentials["domain"] . "/scripts/server.php");
         if (!@$session->login($this->_credentials ["user"], $this->_credentials ["password"], \Gpf_Api_Session::AFFILIATE)) {
             $connection = false;
-        } else{
             $session = new \Gpf_Api_Session("http://" . $this->_credentials["domain"] . "/scripts/server.php");
             if (!@$session->login($this->_credentials ["user"], $this->_credentials ["password"], \Gpf_Api_Session::AFFILIATE)) {
                 $connection = false;
