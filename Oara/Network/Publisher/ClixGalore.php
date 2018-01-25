@@ -121,15 +121,18 @@ class ClixGalore extends \Oara\Network
         $count = $results->length;
         if ($count == 1) {
             $selectNode = $results->item(0);
+
             $merchantLines = $selectNode->childNodes;
             for ($i = 0; $i < $merchantLines->length; $i++) {
-                $cid = $merchantLines->item($i)->attributes->getNamedItem("value")->nodeValue;
-                if ($cid != 0) {
-                    $obj = array();
-                    $obj['cid'] = $merchantLines->item($i)->attributes->getNamedItem("value")->nodeValue;
-                    $obj['name'] = $merchantLines->item($i)->nodeValue;
-                    $obj['url'] = '';
-                    $merchants[] = $obj;
+                if ($merchantLines->item($i)->attributes != null){
+                    $cid = $merchantLines->item($i)->attributes->getNamedItem("value")->nodeValue;
+                    if ($cid != 0) {
+                        $obj = array();
+                        $obj['cid'] = $merchantLines->item($i)->attributes->getNamedItem("value")->nodeValue;
+                        $obj['name'] = $merchantLines->item($i)->nodeValue;
+                        $obj['url'] = '';
+                        $merchants[] = $obj;
+                    }
                 }
             }
         } else {
