@@ -97,7 +97,7 @@ class Access
 
         if (!is_dir($dir)) {
             if (!mkdir($dir, 0777, true)) {
-                throw new \Exception ('Problem creating folder in Access');
+                throw new \Exception ('Problem creating folder in Access'.$dir);
             }
         }
         // Deleting the last cookie

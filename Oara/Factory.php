@@ -41,7 +41,12 @@ class Factory
 
         $affiliate = null;
         try {
-            $affiliate = new $networkClassName();
+            if (class_exists($networkClassName)){
+                $affiliate = new $networkClassName();
+            } else{
+                throw new \Exception("Class not found");
+            }
+
         } catch (\Exception $e) {
             throw new \Exception('Error creating instance ' . $networkClassName . ' - ' . $e->getMessage());
         }

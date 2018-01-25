@@ -191,27 +191,28 @@ class AffiliateGateway extends \Oara\Network
 
                 $transaction = Array();
                 $transaction['merchantId'] = $merchantId;
-                $transactionDate = \DateTime::createFromFormat("d/m/Y H:i:s", $transactionExportArray[4]);
+                $transactionDate = \DateTime::createFromFormat("d/m/Y H:i:s", $transactionExportArray[6]);
+
                 $transaction['date'] = $transactionDate->format("Y-m-d H:i:s");
                 $transaction['unique_id'] = $transactionExportArray[0];
 
-                if ($transactionExportArray[12] != null && \trim($transactionExportArray[12]) != null) {
-                    $transaction['custom_id'] = $transactionExportArray[12];
+                if ($transactionExportArray[15] != null && \trim($transactionExportArray[15]) != null) {
+                    $transaction['custom_id'] = $transactionExportArray[15];
                 }
 
-                if ($transactionExportArray[15] == "Approved" || $transactionExportArray[15] == "Approve") {
+                if ($transactionExportArray[18] == "Approved" || $transactionExportArray[18] == "Approve") {
                     $transaction['status'] = \Oara\Utilities::STATUS_CONFIRMED;
                 } else
-                    if ($transactionExportArray[15] == "Pending") {
+                    if ($transactionExportArray[18] == "Pending") {
                         $transaction['status'] = \Oara\Utilities::STATUS_PENDING;
                     } else
-                        if ($transactionExportArray[15] == "Declined" || $transactionExportArray[15] == "Rejected") {
+                        if ($transactionExportArray[18] == "Declined" || $transactionExportArray[18] == "Rejected") {
                             $transaction['status'] = \Oara\Utilities::STATUS_DECLINED;
                         } else {
-                            throw new \Exception ("No Status found " . $transactionExportArray[15]);
+                            throw new \Exception ("No Status found " . $transactionExportArray[18]);
                         }
-                $transaction['amount'] = \Oara\Utilities::parseDouble($transactionExportArray[7]);
-                $transaction['commission'] = \Oara\Utilities::parseDouble($transactionExportArray[9]);
+                $transaction['amount'] = \Oara\Utilities::parseDouble($transactionExportArray[10]);
+                $transaction['commission'] = \Oara\Utilities::parseDouble($transactionExportArray[12]);
                 $totalTransactions[] = $transaction;
             }
 
